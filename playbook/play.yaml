@@ -1,0 +1,14 @@
+# -*- mode: yaml; mode: view -*-
+---
+- hosts:
+    - hypervisors
+  roles:
+    # - tunnel                    # FIXME
+    - bridge
+    # - kvm                       # FIXME
+# FIXME:
+# - hosts:
+#     - guest
+#   roles:
+#     guests
+...

@@ -1,0 +1,6 @@
+---
+bridge_pkgs:
+  - iproute2
+  # - bridge-utils
+  # - python-selinux
+...

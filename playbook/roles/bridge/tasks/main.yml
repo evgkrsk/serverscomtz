@@ -1,0 +1,19 @@
+---
+- name: Fail on malformed IP
+  fail:
+    msg: "{{ item.address }} is not ipv4 address"
+  when:
+    - item.address is defined
+    - not item.address|ipv4
+  with_items: "{{ bridge_devices }}"
+  loop_control:
+    label: "{{ item.address|d('null') }} ipv4 test"
+
+- name: Presence of required packages
+  package:
+    name: "{{ bridge_pkgs }}"
+    state: present
+
+- include: configure.yml
+
+...

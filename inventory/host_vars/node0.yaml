@@ -1,0 +1,17 @@
+# -*- mode: yaml; mode: view -*-
+---
+bridge_devices:
+  - dev: br0                    # mgmt
+    address: 192.168.0.1/24
+    ports: []
+  - dev: br1                    # L2
+    ports: []                   # FIXME: add tunnel interface
+
+vms:
+  - name: vm0
+    mgmt: 192.168.0.2/24
+    ips:
+      - 192.168.2.1/24
+      - 10.1.2.3/24
+      - 172.16.1.2/24
+...
