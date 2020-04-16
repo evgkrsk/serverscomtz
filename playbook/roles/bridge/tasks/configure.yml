@@ -9,6 +9,9 @@
     label: "ip link add name {{ item.dev }} type bridge"
   register: bridge_brctl_result
 
+- debug:
+    var: bridge_brctl_result
+
 - name: IP address on bridge interfaces
   shell: >
     ip address add {{ item.item.address }}
@@ -35,9 +38,6 @@
   when:
     - bridge_brctl_result is defined
     - bridge_brctl_result.changed
-
-# - debug:
-#     var: bridge_brctl_result
 
 - name: No IP addresses on L2 bridge ports
   shell: >
