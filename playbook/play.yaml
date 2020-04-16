@@ -2,12 +2,14 @@
 ---
 - hosts:
     - hypervisors
+  strategy: free
   roles:
     # - tunnel                    # FIXME
     - bridge
     # - kvm                       # FIXME
 # FIXME:
 # - hosts:
+#   strategy: free
 #     - guest
 #   roles:
 #     guests
