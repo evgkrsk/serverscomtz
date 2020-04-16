@@ -9,8 +9,8 @@
     label: "ip link add name {{ item.dev }} type bridge"
   register: bridge_brctl_result
 
-- debug:
-    var: bridge_brctl_result
+# - debug:
+#     var: bridge_brctl_result
 
 - name: IP address on bridge interfaces
   shell: >
