@@ -14,4 +14,5 @@ tunnel_devices:
     peer: IP                    # ОБЯЗАТЕЛЬНЫЙ адрес пира
     sport: uint                 # default: 1025 - исходящий UDP-порт
     port: uint                  # default: 1025 - целевой UDP-порт
+    mtu: uint                   # default: 1446 - MTU для туннельного интерфейса
 ```

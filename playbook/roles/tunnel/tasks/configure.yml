@@ -56,5 +56,24 @@
     - tunnel_sessions.stdout_lines is defined
     - '"Session " + item.session|d(1)|string + " in tunnel " + item.id|d(1)|string not in tunnel_sessions.stdout_lines'
 
-# ip link set l2tpeth0 up mtu 14
+- name: Get working tunnel interfaces
+  shell: 'ip link | grep -E "l2tpeth.+\bUP\b"'
+  register: tunnel_up_links
+  check_mode: no
+  changed_when: False
+  failed_when: False
+
+- debug:
+    var: tunnel_up_links
+
+- name: Get up tunnel interface and set MTU
+  shell: >
+    ip link set l2tpeth{{ item.session|d("1") }} up mtu {{ item.mtu|d("1446") }};
+  with_items: "{{ tunnel_devices }}"
+  loop_control:
+    label: "ip link set up"
+  when:
+    - tunnel_up_links.stdout is defined
+    - tunnel_up_links.stdout is not search("l2tpeth" + item.session|d(1)|string)
+
 ...
