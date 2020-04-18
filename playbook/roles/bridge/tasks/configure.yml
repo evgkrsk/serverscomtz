@@ -1,8 +1,19 @@
 # -*- mode: yaml; mode: view -*-
 ---
+
+- name: Add new ports to existing bridges
+  shell: >
+    ip link set {{ item.1 }} master {{ item.0.dev }};
+  with_subelements:
+    - "{{ bridge_devices }}"
+    - ports
+  when:
+    - item.0.dev in ansible_facts
+    - item.1 not in {{ ansible_facts[item.0.dev]['interfaces'] | list }}
+
 - name: Bridge interfaces
   shell: >
-    ip link add name {{ item.dev }} type bridge
+    ip link add name {{ item.dev }} type bridge;
   when:
     - item.dev not in ansible_interfaces
   with_items: "{{ bridge_devices }}"
@@ -10,12 +21,12 @@
     label: "ip link add name {{ item.dev }} type bridge"
   register: bridge_brctl_result
 
-- debug:
-    var: bridge_brctl_result
+# - debug:
+#     var: bridge_brctl_result
 
 - name: IP address on bridge interfaces
   shell: >
-    ip address add {{ item.item.address }}
+    ip address add {{ item.item.address }};
     dev {{ item.item.dev }}
   when:
     - bridge_brctl_result is defined
@@ -27,7 +38,7 @@
 
 - name: Link set up on bridge interfaces
   shell: >
-    ip link set up dev {{ item.item.dev }}
+    ip link set up dev {{ item.item.dev }};
   when:
     - bridge_brctl_result is defined
     - item.changed
@@ -48,11 +59,10 @@
   with_subelements:
     - "{{ bridge_brctl_result.results }}"
     - item.ports
-    - flags:
-      skip_missing: true
   loop_control:
     label: "{{ item.0.item.dev }}:{{ item.1|d('null') }}"
   when:
     - bridge_brctl_result is defined
     - bridge_brctl_result.changed
+
 ...
