@@ -57,7 +57,8 @@
     - '"Session " + item.session|d(1)|string + " in tunnel " + item.id|d(1)|string not in tunnel_sessions.stdout_lines'
 
 - name: Get working tunnel interfaces
-  shell: 'ip link | grep -E "l2tpeth.+\bUP\b"'
+  shell: >
+    ip link | grep -E "l2tpeth.+\bUP\b";
   register: tunnel_up_links
   check_mode: no
   changed_when: False

@@ -1,0 +1,5 @@
+# -*- mode: yaml; mode: view -*-
+---
+skip_list:
+  - '306'
+...

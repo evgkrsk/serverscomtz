@@ -2,6 +2,7 @@
 ---
 yaml-files:
   - '.yamllint'
+  - '.ansible-lint'
   - '*.yaml'
   - '*.yml'
 
