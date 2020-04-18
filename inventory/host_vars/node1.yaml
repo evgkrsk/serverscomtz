@@ -12,7 +12,7 @@ bridge_devices:
     ports: []
   - dev: br1                    # L2
     ports:
-      - l2tpeth1
+      - l2tpeth1                # 1 correspond to tunnel id
 
 vms:
   - name: vm1
