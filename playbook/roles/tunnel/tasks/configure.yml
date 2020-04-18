@@ -4,6 +4,7 @@
   shell: >
     ip l2tp show tunnel;
   register: tunnel_tunnels
+  check_mode: no
   changed_when: False
 
 - debug:
@@ -31,6 +32,29 @@
     - '"Tunnel " + item.id|d(1)|string + ", encap UDP" not in tunnel_tunnels.stdout_lines'
 
 # ip l2tp show session 1
-# ip l2tp add session tunnel_id 1 session_id 1
+- name: ip l2tp show session
+  shell: >
+    ip l2tp show session;
+  register: tunnel_sessions
+  check_mode: no
+  changed_when: False
+
+- debug:
+    var: tunnel_sessions
+
+- name: Create sessions if needed
+  shell: >
+    ip l2tp add session
+    name l2tpeth{{ item.session|d("1") }}
+    tunnel_id {{ item.id|d("1") }}
+    session_id {{ item.session|d("1") }}
+    peer_session_id {{ item.session|d("1") }};
+  with_items: "{{ tunnel_devices }}"
+  loop_control:
+    label: "ip l2tp add session"
+  when:
+    - tunnel_sessions.stdout_lines is defined
+    - '"Session " + item.session|d(1)|string + " in tunnel " + item.id|d(1)|string not in tunnel_sessions.stdout_lines'
+
 # ip link set l2tpeth0 up mtu 14
 ...

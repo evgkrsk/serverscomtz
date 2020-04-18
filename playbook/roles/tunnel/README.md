@@ -10,7 +10,7 @@
 tunnel_devices:
   - description: string         # Описание
     id: uint                    # default: 1 - Идентификатор туннеля, должен совпадать с другой стороной, >0
-    session: uint               # default: 1 - Идентификатор сессий, должен совпадать, создаёт интерфейс l2tpeth<NUM>
+    session: uint               # default: 1 - Идентификатор сессий, должен совпадать, создаёт интерфейс l2tpeth<NUM>, >0
     peer: IP                    # ОБЯЗАТЕЛЬНЫЙ адрес пира
     sport: uint                 # default: 1025 - исходящий UDP-порт
     port: uint                  # default: 1025 - целевой UDP-порт
