@@ -11,7 +11,7 @@
     label: "ip link set {{ item.1 }} master {{ item.0.dev }}"
   when:
     - item.0.dev in ansible_facts
-    - item.1 not in {{ ansible_facts[item.0.dev]['interfaces'] | list }}
+    - item.1 not in ansible_facts[item.0.dev]['interfaces']
 
 - name: Bridge interfaces
   shell: >
