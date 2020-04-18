@@ -4,8 +4,6 @@ ansible_host: 173.237.8.52
 
 tunnel_devices:
   - description: node0
-    id: 0
-    session: 0
     peer: 173.237.8.60
 
 bridge_devices:

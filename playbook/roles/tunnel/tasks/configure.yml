@@ -1,7 +1,35 @@
 # -*- mode: yaml; mode: view -*-
 ---
-# ip l2tp show tunnel 1
-# ip l2tp add tunnel tunnel_id 1 peer_tunnel_id 1 udp_sport 1025 udp_dport 1025
+- name: ip l2tp show tunnel
+  shell: >
+    ip l2tp show tunnel;
+  register: tunnel_tunnels
+  changed_when: False
+
+- debug:
+    var: tunnel_tunnels
+
+- name: Abort if we cannot fetch tunnels list
+  fail:
+    msg: "ip l2tp show tunnel returns non-zero exit code, check kernel/iproute2 version!"
+  when: tunnel_tunnels.failed
+
+- name: Create tunnels if needed
+  shell: >
+    ip l2tp add tunnel
+    remote {{ item.peer }}
+    local {{ ansible_default_ipv4.address }}
+    tunnel_id {{ item.id|d("1") }}
+    peer_tunnel_id {{ item.id|d("1") }}
+    udp_sport {{ item.sport|d("1025") }}
+    udp_dport {{ item.dport|d("1025") }};
+  with_items: "{{ tunnel_devices }}"
+  loop_control:
+    label: "ip l2tp add tunnel"
+  when:
+    - tunnel_tunnels.stdout_lines is defined
+    - '"Tunnel " + item.id|d(1)|string + ", encap UDP" not in tunnel_tunnels.stdout_lines'
+
 # ip l2tp show session 1
 # ip l2tp add session tunnel_id 1 session_id 1
 # ip link set l2tpeth0 up mtu 14
