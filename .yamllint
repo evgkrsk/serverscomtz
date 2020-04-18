@@ -1,6 +1,7 @@
 # -*- mode: yaml; mode: view -*-
 ---
 yaml-files:
+  - '.yamllint'
   - '*.yaml'
   - '*.yml'
 
@@ -21,8 +22,8 @@ rules:
     level: warning
   comments-indentation:
     level: warning
-  document-end: disable
-  document-start: disable
+  document-end: enable
+  document-start: enable
   empty-lines:
     max: 2
   empty-values: enable

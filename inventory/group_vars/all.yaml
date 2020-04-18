@@ -1,0 +1,4 @@
+# -*- mode: yaml; mode: view -*-
+---
+ansible_user: root
+...

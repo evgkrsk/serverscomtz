@@ -1,0 +1,20 @@
+# -*- mode: yaml; mode: view -*-
+---
+- name: Fail on malformed IP
+  fail:
+    msg: "{{ item.peer }} is not IP address"
+  when:
+    - item.peer is defined
+    - not item.peer|ipaddr
+  with_items: "{{ tunnel_devices }}"
+  loop_control:
+    label: "{{ item.peer|d('null') }} IP test"
+
+- name: Presence of required packages
+  package:
+    name: "{{ tunnel_pkgs }}"
+    state: present
+
+- include: configure.yml
+
+...

@@ -1,3 +1,4 @@
+# -*- mode: yaml; mode: view -*-
 ---
 - name: Fail on malformed IP
   fail:

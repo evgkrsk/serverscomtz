@@ -4,7 +4,7 @@
     - hypervisors
   strategy: free
   roles:
-    # - tunnel                    # FIXME
+    - tunnel
     - bridge
     # - kvm                       # FIXME
 # FIXME:

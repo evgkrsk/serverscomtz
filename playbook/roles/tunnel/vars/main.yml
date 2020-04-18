@@ -1,0 +1,6 @@
+# -*- mode: yaml; mode: view -*-
+---
+tunnel_pkgs:
+  - iproute2
+  # - python-selinux
+...
