@@ -28,8 +28,8 @@
 
 - name: IP address on bridge interfaces
   shell: >
-    ip address add {{ item.item.address }};
-    dev {{ item.item.dev }}
+    ip address add {{ item.item.address }}
+    dev {{ item.item.dev }};
   when:
     - bridge_brctl_result is defined
     - item.changed
