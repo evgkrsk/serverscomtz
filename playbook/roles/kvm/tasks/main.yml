@@ -26,4 +26,5 @@
     when: kvm_pool_xml_path.changed
 
   - import_tasks: state.yml
+  when: kvm_vm|length > 0
 ...

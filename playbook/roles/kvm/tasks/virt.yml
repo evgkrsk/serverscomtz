@@ -142,7 +142,6 @@
     - name: Virt define
       virt:
         command: define
-        name: "{{ item.name }}"
         xml: "{{ lookup('template',  kvm_tmp_dir ~ '/' ~ ansible_nodename ~ '-vm-' ~ item.name ~ '.xml.j2') }}"
       when:
         - item.name not in kvm_existing_vms.list_vms

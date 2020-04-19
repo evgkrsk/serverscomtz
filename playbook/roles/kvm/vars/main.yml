@@ -1,16 +1,16 @@
 # -*- mode: yaml; mode: view -*-
 ---
 kvm_pkgs:
-  - qemu-kvm
+  - libguestfs-tools
   - libvirt-bin
-  - virtinst
   - pixz
   - python-lxml
+  - qemu-kvm
+  - virtinst
 
 kvm_sysprep_pkgs:
-  - python2-simplejson
   - libselinux-python
-  - sudo
+  - python2-simplejson
   - yum-utils
 
 kvm_tmp_dir: "/tmp/ansible-kvm"

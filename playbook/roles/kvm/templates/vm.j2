@@ -7,7 +7,7 @@
   </memoryBacking>
   <vcpu placement='static'>{{ item[0].cpu_count|d('1') }}</vcpu>
   <os>
-    <type arch='x86_64' machine='pc-i440fx-rhel7.0.0'>hvm</type>
+    <type arch='x86_64' machine='pc'>hvm</type>
     <boot dev='hd'/>
   </os>
   <features>
@@ -36,7 +36,7 @@
     <suspend-to-disk enabled='no'/>
   </pm>
   <devices>
-    <emulator>/usr/libexec/qemu-kvm</emulator>
+    <emulator>/usr/bin/kvm</emulator>
     <disk type='{% if item[2].matches[0].pool.type == "logical" %}block{% elif item[2].matches[0].pool.type == "dir" %}file{% endif %}' device='disk'>
       <driver name='qemu' type='{{ item[0].disk_format|d('raw') }}' cache='none' io='native'/>
       <source {% if item[2].matches[0].pool.type == "logical" %}dev{% elif item[2].matches[0].pool.type == "dir" %}file{% endif %}='{{ item[1].matches[0].path }}/vm_{{ item[0].name }}'/>

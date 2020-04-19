@@ -26,7 +26,8 @@
 
     - name: VM templates uncompressed
       command: "pixz -d {{ item.dest }}"
-      creates: "{{ item.dest | regex_replace('\\.xz$', '') }}"
+      args:
+        creates: "{{ item.dest | regex_replace('\\.xz$', '') }}"
       when:
         - item.changed
         - item.dest is defined
