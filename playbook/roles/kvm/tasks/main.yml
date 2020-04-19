@@ -1,0 +1,29 @@
+# -*- mode: yaml; mode: view -*-
+---
+- name: Required packages
+  package:
+    name: "{{ kvm_pkgs }}"
+    state: present
+
+- import_tasks: services.yml
+
+- name: Temporary catalog
+  become: no
+  file:
+    path: "{{ kvm_tmp_dir }}"
+    state: directory
+  delegate_to: localhost
+
+- import_tasks: net.yml
+
+- import_tasks: pool.yml
+  when: kvm_pool|length > 0
+
+- block:
+  - import_tasks: pre.yml
+
+  - include_tasks: virt.yml
+    when: kvm_pool_xml_path.changed
+
+  - import_tasks: state.yml
+...

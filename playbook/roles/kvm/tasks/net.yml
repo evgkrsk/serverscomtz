@@ -1,0 +1,7 @@
+# -*- mode: yaml; mode: view -*-
+---
+- name: Default network is absent
+  virt_net:
+    name: default
+    state: absent
+...

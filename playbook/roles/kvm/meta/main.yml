@@ -1,0 +1,5 @@
+# -*- mode: yaml; mode: view -*-
+---
+dependencies:                   # noqa 701
+  - role: bridge
+...

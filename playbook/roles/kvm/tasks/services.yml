@@ -1,0 +1,27 @@
+# -*- mode: yaml; mode: view -*-
+---
+- name: Libvirt daemon enabled and started
+  systemd:
+    name: libvirtd
+    state: started
+    enabled: yes
+  tags: [ services ]
+
+- name: Libvirt-guests service enabled
+  systemd:
+    name: libvirt-guests
+    enabled: yes
+  tags: [ services ]
+
+- name: Libvirt-guests service settings
+  blockinfile:
+    path: "/etc/default/libvirt-guests"
+    insertafter: EOF
+    block: |
+      ON_BOOT=start
+      START_DELAY=10
+      ON_SHUTDOWN=shutdown
+      PARALLEL_SHUTDOWN=10
+      SHUTDOWN_TIMEOUT=300
+  tags: [ services ]
+...

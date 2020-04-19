@@ -6,11 +6,11 @@
   roles:
     - tunnel
     - bridge
-    # - kvm                       # FIXME
+    - kvm
 # FIXME:
 # - hosts:
 #   strategy: free
 #     - guest
 #   roles:
-#     guests
+#     - addip
 ...

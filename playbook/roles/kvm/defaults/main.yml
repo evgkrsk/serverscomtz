@@ -1,0 +1,9 @@
+# -*- mode: yaml; mode: view -*-
+---
+kvm_accept_existing_disks: false
+kvm_leave_hostname: false
+kvm_pool: []
+kvm_templates_uri: "https://cloud.centos.org/centos/7/images"
+kvm_template_default: CentOS-7-x86_64-GenericCloud-1907.qcow2
+kvm_vm: []
+...

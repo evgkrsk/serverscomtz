@@ -1,0 +1,11 @@
+# -*- mode: yaml; mode: view -*-
+---
+kvm_pool:
+  - name: images
+    type: dir
+    path: /var/lib/libvirt/images
+
+  - name: vms
+    type: dir
+    path: /var/lib/libvirt/kvm
+...
