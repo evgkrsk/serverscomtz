@@ -3,9 +3,11 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin
 setenforce 0
 systemctl enable --now getty@ttyS0.service
 sed -r -i "s/^(SELINUX=)enforcing/\1permissive/" /etc/selinux/config
-echo -e "\nnameserver 1.1.1.1\nnameserver 8.8.8.8\n" >> /etc/resolv.conf
+echo "nameserver 1.1.1.1" > /etc/resolv.conf
+echo "nameserver 8.8.8.8" >> /etc/resolv.conf
 yum -q -y clean metadata
 yum -q -y makecache
 yum -q -y update
+yum -q -y remove cloud-init
 yum -q -y install {{ kvm_sysprep_pkgs|join(' ') }}
 needs-restarting --reboothint || reboot

@@ -1,5 +1,5 @@
-copy-in /etc/resolv.conf:/etc
 touch /.autorelabel
 mkdir /etc/systemd/system/getty@ttyS0.service.d
 copy-in {{ kvm_templates_path }}/autologin.conf:/etc/systemd/system/getty@ttyS0.service.d
+delete /etc/systemd/system/multi-user.target.wants/*cloud*
 firstboot {{ kvm_sysprep_tmp_2.path }}
