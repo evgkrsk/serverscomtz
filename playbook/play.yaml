@@ -7,10 +7,17 @@
     - tunnel
     - bridge
     - kvm
-# FIXME:
-# - hosts:
-#   strategy: free
-#     - guest
-#   roles:
-#     - addip
+
+- hosts:
+    - localhost
+  tasks:
+    - name: wait for VMs to get up
+      wait_for:
+        timeout: 5
+
+- hosts:
+    - guests
+  strategy: free
+  roles:
+    - addip
 ...

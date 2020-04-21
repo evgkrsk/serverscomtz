@@ -8,4 +8,7 @@ kvm_pool:
   - name: vms
     type: dir
     path: /var/lib/libvirt/kvm
+
+# yamllint disable-line rule:line-length
+kvm_sysprep_root_key: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvp95jmkyXK4TeyckboQ4WrV71DwJd65J6Ef1ew68rwraJ9sdLJzK2yiXmj6NyFhZC7PuJ0/m18jCV1v3gR9cfM12OmnBlSQWTkC5DrOQgoOgelu5fag26baw18XNhgJgSxotDMaLeBxy9Vw4m9AQmO/mpht63PZCVzLdKaUCirmdo1/NjbG6oDTgj05dJpdVzNGDasG3Z6Jmivi+UIoK9RBVpjerA6pY6YZYow2kRKeJUdM2ixwNbYbXNTzGThtwCFTysW8uhuCO5QZ08ZHppQ932HLZS2D3qccDk6WOgLXU5Sfgf7LE+7NR61RxRV87pvxI2Kxi0LmeNOgrqOOYOw== evg@home.krasnoyarsk'
 ...

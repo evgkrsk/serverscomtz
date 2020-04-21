@@ -18,6 +18,7 @@ kvm_vm:
   - name: vm0
     nic_bridge: br0
     pool_name: vms
+    sysprep_root_pass: pass
     sysprep_ifcfg:
       - dev: eth0
         address: 192.168.0.2/24

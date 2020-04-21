@@ -2,13 +2,13 @@
 ---
 all:
   children:
-# Physical machines, 2 hosts is mandatory (may be one real host)
+    # Physical machines, 2 hosts is mandatory (may be one real host)
     hypervisors:
       hosts:
         node0:
         node1:
 
-# Guest machines
+    # Guest machines
     guests:
       hosts:
         vm0:
