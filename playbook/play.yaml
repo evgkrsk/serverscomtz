@@ -19,5 +19,5 @@
     - guests
   strategy: free
   roles:
-    - addip
+    - ipaddr
 ...
