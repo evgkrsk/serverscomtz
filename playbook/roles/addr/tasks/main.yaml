@@ -1,0 +1,38 @@
+# -*- mode: yaml; mode: view -*-
+---
+- name: Fail on malformed IP
+  fail:
+    msg: "{{ item.1 }} is not IP address"
+  when:
+    - not item.1|ipaddr
+  with_subelements:
+    - "{{ addr_addr }}"
+    - addr
+  loop_control:
+    label: "{{ item.0.dev }} IP {{ item.1 }} test"
+
+- name: Delete IPs
+  shell: >
+    echo "Del {{ item.1 }} from {{ item.0.dev }}"
+  with_subelements:
+    - "{{ addr_addr }}"
+    - addr
+  when:
+    - item.0.dev is defined
+    - item.0.dev in ansible_interfaces
+    - item.1 in in ansible_all_ipv4_addresses
+    - item.1.exclusive|d(true)
+  loop_control:
+    label: "Drop addreses on {{ item.dev }}"
+
+- name: Add IPs
+  shell: >
+    echo Add "{{ item.1 }} to {{ item.0.dev }}"
+  with_subelements:
+    - "{{ addr_addr }}"
+    - addr
+  when:
+    - item.0.dev is defined
+    - item.0.dev in ansible_interfaces
+    - item.1 not in ansible_all_ipv4_addresses
+...
