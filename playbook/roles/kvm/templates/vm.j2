@@ -56,10 +56,12 @@
     <controller type='pci' index='0' model='pci-root'/>
     <controller type='virtio-serial' index='0'>
     </controller>
+    {% for iface in item[0].sysprep_ifcfg %}
     <interface type='bridge'>
-      <source bridge='{{ item[0].nic_bridge }}'/>
-      <model type='{{ item[0].nic_model|default('virtio') }}'/>
+      <source bridge='{{ iface.nic_bridge }}'/>
+      <model type='{{ iface.nic_model|default('virtio') }}'/>
     </interface>
+    {% endfor %}
     <serial type='pty'>
       <target port='0'/>
     </serial>

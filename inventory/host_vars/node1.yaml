@@ -16,13 +16,14 @@ bridge_devices:
 
 kvm_vm:
   - name: vm1
-    nic_bridge: br0
     pool_name: vms
     sysprep_root_pass: pass
     sysprep_ifcfg:
       - dev: eth0
+        nic_bridge: br0
         address: 192.168.1.2/24
       - dev: eth1
+        nic_bridge: br1
     state: running
 
 addr_addr:

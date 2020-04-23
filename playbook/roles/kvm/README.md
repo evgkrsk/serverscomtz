@@ -41,7 +41,6 @@ kvm_templates_uri: string    # URI, откуда скачивать шаблон
 
 kvm_vm:
 - name: string       # (ОБЯЗАТЕЛЬНО) Имя ВМ
-  nic_bridge: string # (ОБЯЗАТЕЛЬНО) Мост на хосте, в который включается ВМ
   pool_name: string  # (ОБЯЗАТЕЛЬНО) Используемый пул хранения
   template_name: string # (default: kvm_template_default) Имя образа-шаблона
   cpu_count: int        # (default: 1) Кол-во виртуальных ЦПУ
@@ -50,12 +49,13 @@ kvm_vm:
   disk_format: string    # (default: raw) Формат образа ВМ (raw|qcow2)
   disk_gb: int  # (default: 16) Объём образа ВМ, ГБ (16 ГБ или больше)
   memory_mb: int                # (default: 1024) Объём RAM, МБ
-  nic_model: string # (default: virtio) модель виртуальной сетевой карты (virtio|e1000|rtl8139)
   state: string # (default: running) Состояние ВМ (running|shutdown|destroyed|paused|undefined); undefined полностью удаляет ВМ с первым диском
   sysprep_domain: string # (default: from ansible_nodename) Доменное имя для sysprep
   sysprep_hostname: string     # (default: name) Имя хоста для sysprep
   sysprep_ifcfg:               # Конфигурация интерфейсов.
     - dev: string              # Имя интерфейса (например, eth0)
+      nic_bridge: string # (ОБЯЗАТЕЛЬНО) Мост на хосте, в который включается ВМ
+      nic_model: string # (default: virtio) модель виртуальной сетевой карты (virtio|e1000|rtl8139)
       bootproto: string # (default: "none") Протокол загрузки (none|dhcp)
       address: CIDR     # IP-адрес (для static)
       gateway: ipv4     # Шлюз по-умолчанию
@@ -91,12 +91,12 @@ kvm_pool:
 kvm_vm:
   - name: example.com
     memory_mb: 2048
-    nic_bridge: br1
     pool_name: main
     disk_gb: 40
     cpu_count: 2
     sysprep_ifcfg:
       - dev: eth0
+        nic_bridge: br1
         address: 192.168.100.10/24
         gateway: 192.168.100.1
 ```
