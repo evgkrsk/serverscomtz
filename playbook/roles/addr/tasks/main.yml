@@ -13,19 +13,19 @@
 
 - name: Delete IPs
   shell: >
-    ip addr del {{ item.1 }} dev {{ item.0.dev }};
-  with_subelements:
+    ip addr del {{ item[1] }} dev {{ item[0].dev }};
+  with_nested:
     - "{{ addr_addr }}"
-    - addr
+    - "{{ ansible_all_ipv4_addresses }}"
   when:
-    - item.0.dev is defined
-    - item.0.dev in ansible_interfaces
-    # - item.1|ipaddr('address') not in ansible_facts[item.0.dev]['ipv4'] # may be dict OR list!
-    - item.1|ipaddr('address') in ansible_all_ipv4_addresses
-    - item.1.exclusive|d(true)
+    - item[0].dev is defined
+    - item[0].dev in ansible_interfaces
+    - item[0].exclusive|d(true)
+    - item[1] not in item[0].addr|ipaddr('address')
   loop_control:
-    label: "ip addr del {{ item.1 }} dev {{ item.0.dev }}"
+    label: "ip addr del {{ item[1] }} dev {{ item[0].dev }}"
   failed_when: False
+  changed_when: False
 
 - name: Add IPs
   shell: >
