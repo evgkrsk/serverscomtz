@@ -13,7 +13,7 @@
   tasks:
     - name: wait for VMs to get up
       wait_for:
-        timeout: 5
+        timeout: 10
 
 - hosts:
     - guests
