@@ -3,4 +3,12 @@
 ansible_host: 192.168.0.2
 # FIXME: find better way to set jumphost
 ansible_ssh_common_args: '-o ProxyCommand="ssh -A -W %h:%p -q root@173.237.8.60"'
+
+addr_addr:
+  - dev: eth1
+    addr:
+      - 192.168.2.1/24
+      - 10.1.2.3/24
+      - 172.16.1.2/24
+
 ...
