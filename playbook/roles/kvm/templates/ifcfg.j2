@@ -3,8 +3,10 @@ TYPE="Ethernet"
 ONBOOT="yes"
 BOOTPROTO="{{ item.1.bootproto|d('none') }}"
 {% if item.1.bootproto|d('none') == "none" %}
+{% if item.1.address is defined %}
 IPADDR="{{ item.1.address|ipv4('address') }}"
 PREFIX="{{ item.1.address|ipv4('prefix') }}"
+{% endif %}
 {% if item.1.gateway is defined %}
 GATEWAY="{{ item.1.gateway }}"
 {% endif %}
