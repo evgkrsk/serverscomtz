@@ -1,5 +1,5 @@
 Run it like this:
 
-py.test -v --hosts='ansible://all' --ansible-inventory ../inventory/hosts.yaml
+py.test -v --hosts='ansible://all' --ansible-inventory inventory/hosts.yaml tests
 
-from tests/ directory
+from project toplevel directory
