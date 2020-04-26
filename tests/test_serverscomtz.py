@@ -21,10 +21,10 @@ def test_bridge_role(host):
 def test_tunnel_role(host):
     ansible_vars = host.ansible.get_variables()
     if "tunnel_devices" in ansible_vars:
+        show_tunnels = host.check_output("ip l2tp show tunnel")
         for dev in ansible_vars["tunnel_devices"]:
             peer = str(IPNetwork(dev["peer"]).ip)
             assert peer
-            show_tunnels = host.check_output("ip l2tp show tunnel")
             if "id" in dev:
                 id = dev["id"]
             else:
