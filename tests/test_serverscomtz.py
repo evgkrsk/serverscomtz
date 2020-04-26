@@ -45,3 +45,21 @@ def test_kvm_role(host):
                 state = "running"
             if state == "running":
                 assert search("{}.+{}".format(vm["name"], state), virsh_list)
+
+
+def test_addr_role(host):
+    ansible_vars = host.ansible.get_variables()
+    if "addr_addr" in ansible_vars:
+        for addr in ansible_vars["addr_addr"]:
+            host_addr = set(
+                filter(lambda x: ":" not in x, host.interface(addr["dev"]).addresses)
+            )
+            addr_addr = set(map(lambda x: str(IPNetwork(x).ip), addr["addr"]))
+            if "exclusive" in addr:
+                exclusive = addr["exclusive"]
+            else:
+                exclusive = True
+            if exclusive:
+                assert addr_addr == host_addr
+            else:
+                assert addr_addr <= host_addr
