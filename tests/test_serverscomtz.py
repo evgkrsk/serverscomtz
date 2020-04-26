@@ -2,6 +2,7 @@
 # -*- mode: python; mode: view -*-
 
 from netaddr import IPNetwork
+from re import search
 
 
 def test_bridge_role(host):
@@ -31,3 +32,16 @@ def test_tunnel_role(host):
                 id = "1"
             assert "to {}".format(peer) in show_tunnels
             assert "Tunnel {},".format(id) in show_tunnels
+
+
+def test_kvm_role(host):
+    ansible_vars = host.ansible.get_variables()
+    if "kvm_vm" in ansible_vars:
+        virsh_list = host.check_output("virsh list")
+        for vm in ansible_vars["kvm_vm"]:
+            if "state" in vm:
+                state = vm["state"]
+            else:
+                state = "running"
+            if state == "running":
+                assert search("{}.+{}".format(vm["name"], state), virsh_list)
