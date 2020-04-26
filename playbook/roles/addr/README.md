@@ -9,7 +9,7 @@
 
 ```yaml
 addr_addr:
-- dev: string                   # имя сетевого интерфейса
+- dev: string                   # ОБЯЗАТЕЛЬНОЕ имя сетевого интерфейса
   exclusive: bool               # default: True - должны ли на интерфейсы быть ТОЛЬКО указанные адреса
   addr:                         # list
   - CIDR                        # адрес в CIDR-нотации
