@@ -1,4 +1,4 @@
-#!/usr/bin/evg python3
+#!/usr/bin/env python3
 # -*- mode: python; mode: view -*-
 
 from netaddr import IPNetwork
